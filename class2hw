@@ -1,0 +1,9 @@
+from random import randint
+number = randint(1, 100)
+predict = int(input("Guess a number between 1 and 100: "))
+if number == predict:
+    print("You guessed correct!")
+else:
+    print("you failed")
+
+print("The number was", number)
