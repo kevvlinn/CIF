@@ -1,0 +1,44 @@
+from random import randint
+
+print("- Welcome to the Number Guessing Game -")
+print("Tip: Type 'x' anytime to quit.\n")
+
+while True:
+    while True:
+        try:
+            low, high = int(input("Lower bound: ")), int(input("Upper bound: "))
+            if low < high: break
+            print("Lower must be smaller than upper.")
+        except ValueError:
+            print("Enter integers only.")
+
+    limit = input("Limit tries? (y/n): ").lower()
+    trials = int(input("How many tries? ")) if limit == "y" else None
+    number, guesses = randint(low, high), 0
+    print("\n- Starting new round -")
+
+    while True:
+        guess = input(f"Guess between {low}-{high}: ")
+        if guess.lower() == "x":
+            print("Round ended.")
+            break
+        try:
+            guess = int(guess)
+        except ValueError:
+            print("Enter a number or 'x' to quit.")
+            continue
+
+        guesses += 1
+        if guess == number:
+            print("- Correct, you won! -")
+            break
+        print("Too small." if guess < number else "Too big.")
+
+        if trials and guesses >= trials:
+            print(f"- Out of tries! The number was {number}. -")
+            break
+
+    input("Rate us out of 5: ")
+    if input("Play again? (y/n): ").lower() != "y":
+        print("Thanks for playing! Goodbye!")
+        break
