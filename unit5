@@ -1,0 +1,85 @@
+print("._.__._.__._.__._.__._.__._.__._.__._.__._.__._.__._.__._.")
+
+# Instruction function
+def instructions(name):
+    print(f"Welcome, Captain {name}! Here are your mission rules:")
+    print(" - You start with 9 oxygen units.")
+    print(" - You will draw 3 random space items (good or bad). Pick ONE.")
+    print(" - Each correct answer = +1 oxygen.")
+    print(" - Each wrong answer = -1 oxygen.")
+    print(" - Reach 16 oxygen to survive. Reach 0 oxygen and you suffocate.")
+    print("\nHere are your item cards:")
+    return ""
+
+name = input("Enter your astronaut name: ")
+print(instructions(name))
+print("____________________________")
+
+import random
+
+oxygen = 9
+
+# Item cards (benefits & penalties)
+items = [
+    ("Extra O2 Tank (+2 O2)", +2),
+    ("Mini O2 Capsule (+1 O2)", +1),
+    ("Broken O2 Seal (-2 O2)", -2),
+    ("Small Crack in Helmet (-1 O2)", -1),
+    ("Large O2 Tank (+3 O2)", +3),
+    ("Useless Space Rock (0 O2)", 0),
+    ("Half O2 Capsule (+0.5 O2)", +0.5),
+    ("Advanced O2 Filter (+1.5 O2)", +1.5),
+    ("Major Air Leak (-3 O2)", -3),
+    ("Tiny Leak (-0.5 O2)", -0.5)
+]
+
+# Draw 3 random items
+chosen_items = random.sample(items, 3)
+
+print("Your items:")
+for i, item in enumerate(chosen_items, 1):
+    print(f"{i}. {item[0]}")
+
+choice = int(input("\nChoose an item (1, 2, or 3): ")) - 1
+
+item_name, item_effect = chosen_items[choice]
+oxygen += item_effect
+
+print(f"\nYou picked: {item_name}")
+print(f"Your oxygen is now: {oxygen}")
+print("____________________________")
+print("._.__._.__._.__._.__._.__._. MISSION START _.__._.__._.__._.__._.")
+
+# Questions (space trivia, riddles, trick questions)
+questions = [
+    ("What planet is known as the Red Planet?", "Mars"),
+    ("What is the name of our galaxy?", "Milky Way"),
+    ("What force keeps planets in orbit?", "Gravity"),
+    ("I have rings but no fingers. What am I?", "Saturn"),
+    ("What planet is the largest in our solar system?", "Jupiter"),
+    ("What star is closest to Earth?", "Sun"),
+    ("What do astronauts drink instead of water floating everywhere? (type: water)", "Water"),
+    ("If you're in space and drop a hammer and a feather, which hits the ground first?", "Neither"),
+    ("What do we call a star that suddenly explodes?", "Supernova")
+]
+
+# Gameplay loop
+while 0 < oxygen < 16:
+    q, correct = random.choice(questions)
+    ans = input(q + " ")
+
+    if ans.strip().lower() == correct.lower():
+        print("Correct! +1 oxygen")
+        oxygen += 1
+    else:
+        print("Incorrect!")
+        print("Correct answer was:", correct)
+        oxygen -= 1
+
+    print(f"Current oxygen: {oxygen}\n")
+
+# Win/Lose
+if oxygen <= 0:
+    print("💀 You ran out of oxygen... Mission failed.")
+else:
+    print("🎉 You reached safe oxygen levels! Mission success!")
