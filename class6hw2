@@ -1,0 +1,46 @@
+import turtle
+import math
+import time
+
+# --- Setup ---
+screen = turtle.Screen()
+screen.bgcolor("black")
+
+ball = turtle.Turtle()
+ball.shape("circle")
+ball.color("white")
+ball.penup()
+
+tube = turtle.Turtle()
+tube.hideturtle()
+tube.penup()
+tube.goto(0, -150)
+
+# Draw the red firework tube
+tube.color("red")
+tube.begin_fill()
+tube.forward(20)
+tube.left(90)
+tube.forward(60)
+tube.left(90)
+tube.forward(40)
+tube.left(90)
+tube.forward(60)
+tube.left(90)
+tube.forward(20)
+tube.end_fill()
+
+# --- Draw the arc path (simulation) ---
+ball.goto(-200, 0)
+
+for x in range(-200, 1):  
+    # parabola path (simulating arc)
+    y = -0.01 * (x ** 2) + 40
+
+    ball.goto(x, y)
+    time.sleep(0.01)  # slow animation
+
+# ball lands on tube
+ball.goto(0, 60)
+
+turtle.done()
