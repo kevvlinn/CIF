@@ -1,0 +1,26 @@
+import turtle
+
+# --- Setup the turtle window ---
+screen = turtle.Screen()
+screen.bgcolor("white")
+
+pen = turtle.Turtle()
+pen.speed(3)
+
+# --- Get user input ---
+sides = int(input("Enter the number of sides: "))
+length = float(input("Enter the length of each side: "))
+
+# --- Calculate the turning angle ---
+# Formula for the exterior angle:
+# angle = 180 - interior_angle
+# interior_angle = ((sides - 2) * 180) / sides
+turn_angle = 180 - ((sides - 2) * 180 / sides)
+
+# --- Draw the polygon ---
+for _ in range(sides):
+    pen.forward(length)
+    pen.right(turn_angle)
+
+# --- Finish ---
+turtle.done()
